@@ -9,8 +9,8 @@ public class Room {
     private Collection<Door> doors;
     private String name;
 
-    private static int lightCounter = 0;
-    private static int doorsCounter = 0;
+    private static int lightCounter = 1;
+    private static int doorsCounter = 1;
 
 
     public Room(Collection<Light> lights, Collection<Door> doors, String name) {
@@ -37,14 +37,15 @@ public class Room {
         List<Door> doorList = new ArrayList<>();
 
         for (int i = 0; i < lightsString.length(); i++) {
-            lightCounter++;
             lightList.add(new Light(String.valueOf(i+lightCounter), charInterpreter(lightsString.charAt(i))));
         }
 
         for (int i = 0; i < doorString.length(); i++) {
-            doorsCounter++;
             doorList.add(new Door(charInterpreter(doorString.charAt(i)), String.valueOf(i+doorsCounter)));
         }
+
+        lightCounter += lightsString.length();
+        doorsCounter += doorString.length();
 
         return new Room(lightList, doorList, roomName);
     }

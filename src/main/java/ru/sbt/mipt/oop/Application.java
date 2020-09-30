@@ -37,7 +37,7 @@ public class Application {
         for (Room room : smartHome.getRooms()) {
             for (Light light : room.getLights()) {
                 if (light.getId().equals(event.getObjectId())) {
-                    boolean isLightOn = event.getType() == LIGHT_ON
+                    boolean isLightOn = event.getType() == LIGHT_ON;
                     light.setOn(isLightOn);
                     System.out.print("Light " + light.getId() + " in room " + room.getName());
                     if (isLightOn) {
