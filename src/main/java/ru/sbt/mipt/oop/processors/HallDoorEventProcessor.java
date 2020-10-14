@@ -5,9 +5,9 @@ import ru.sbt.mipt.oop.homeobjects.Door;
 import ru.sbt.mipt.oop.homeobjects.Light;
 import ru.sbt.mipt.oop.homeobjects.Room;
 import ru.sbt.mipt.oop.homes.SmartHome;
-import ru.sbt.mipt.oop.utils.CommandSender;
-import ru.sbt.mipt.oop.utils.CommandType;
-import ru.sbt.mipt.oop.utils.SensorCommand;
+import ru.sbt.mipt.oop.command.CommandSender;
+import ru.sbt.mipt.oop.command.CommandType;
+import ru.sbt.mipt.oop.command.SensorCommand;
 
 import static ru.sbt.mipt.oop.events.SensorEventType.DOOR_CLOSED;
 

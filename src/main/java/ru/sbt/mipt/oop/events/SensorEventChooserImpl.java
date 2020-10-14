@@ -1,7 +1,4 @@
-package ru.sbt.mipt.oop.utils;
-
-import ru.sbt.mipt.oop.events.SensorEvent;
-import ru.sbt.mipt.oop.events.SensorEventType;
+package ru.sbt.mipt.oop.events;
 
 public class SensorEventChooserImpl implements SensorEventChooser{
     @Override

@@ -9,7 +9,7 @@ import ru.sbt.mipt.oop.homeobjects.Light;
 import ru.sbt.mipt.oop.homeobjects.Room;
 import ru.sbt.mipt.oop.homes.SmartHome;
 import ru.sbt.mipt.oop.processors.HallDoorEventProcessor;
-import ru.sbt.mipt.oop.utils.CommandSender;
+import ru.sbt.mipt.oop.command.CommandSender;
 
 import java.util.Arrays;
 

@@ -5,8 +5,9 @@ import ru.sbt.mipt.oop.homes.SmartHome;
 import ru.sbt.mipt.oop.processors.DoorEventProcessor;
 import ru.sbt.mipt.oop.processors.HallDoorEventProcessor;
 import ru.sbt.mipt.oop.processors.LightEventProcessor;
-import ru.sbt.mipt.oop.utils.CommandSender;
-import ru.sbt.mipt.oop.utils.SensorEventChooserImpl;
+import ru.sbt.mipt.oop.command.CommandSender;
+import ru.sbt.mipt.oop.events.SensorEventChooserImpl;
+import ru.sbt.mipt.oop.processors.SignalingEventProcessor;
 import ru.sbt.mipt.oop.utils.SmartHomeReader;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class Application {
                 new DoorEventProcessor(),
                 new LightEventProcessor(),
                 new HallDoorEventProcessor(new CommandSender()),
+                new SignalingEventProcessor(),
                 smartHome);
 
         eventCycle.doCycle();
