@@ -1,4 +1,6 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.homes;
+
+import ru.sbt.mipt.oop.homeobjects.Room;
 
 import java.util.ArrayList;
 import java.util.Collection;
