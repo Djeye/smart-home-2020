@@ -7,7 +7,6 @@ import ru.sbt.mipt.oop.events.SensorEventType;
 import ru.sbt.mipt.oop.homeobjects.Signaling;
 import ru.sbt.mipt.oop.homeobjects.signalingstates.ActivatedState;
 import ru.sbt.mipt.oop.homeobjects.signalingstates.DeactivatedState;
-import ru.sbt.mipt.oop.homeobjects.signalingstates.State;
 import ru.sbt.mipt.oop.homes.SmartHome;
 import ru.sbt.mipt.oop.processors.SignalingEventProcessor;
 
@@ -66,9 +65,9 @@ public class SignalingEventProcessorTests {
         signalingEventProcessor.process(smartHome, sensorEvent);
         smartHome.execute(sign -> {
             if (sign.getClass() != Signaling.class) return;
+
             Signaling signaling = (Signaling) sign;
-            State state = signaling.getActualState();
-            state.deactivate(code);
+            signaling.getActualState().deactivate(code);
 
             isStatesEquals = DeactivatedState.class.equals(signaling.getActualState().getClass());
         });
@@ -80,14 +79,15 @@ public class SignalingEventProcessorTests {
     void callAlarmWithWrongCodeTest() {
         SensorEventType sensorEventType = SensorEventType.ALARM_ACTIVATE;
         SensorEvent sensorEvent = new SensorEvent(sensorEventType, "1");
-        sensorEvent.setCode("123");
+        String code = "123";
+        sensorEvent.setCode(code);
 
         signalingEventProcessor.process(smartHome, sensorEvent);
         smartHome.execute(sign -> {
             if (sign.getClass() != Signaling.class) return;
+
             Signaling signaling = (Signaling) sign;
-            State state = signaling.getActualState();
-            state.deactivate("password");
+            signaling.getActualState().deactivate(code + code);
 
             isStatesEquals = DeactivatedState.class.equals(signaling.getActualState().getClass());
         });
