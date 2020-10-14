@@ -2,7 +2,6 @@ package ru.sbt.mipt.oop.homeobjects;
 
 import ru.sbt.mipt.oop.actions.Action;
 import ru.sbt.mipt.oop.actions.Actionable;
-import ru.sbt.mipt.oop.homeobjects.signalingstates.AlarmState;
 import ru.sbt.mipt.oop.homeobjects.signalingstates.DeactivatedState;
 import ru.sbt.mipt.oop.homeobjects.signalingstates.State;
 
@@ -28,8 +27,7 @@ public class Signaling implements Actionable {
             this.code = null;
             System.out.println("> Signaling was deactivating");
         } else {
-            callAlarm();
-            actualState = new AlarmState();
+            actualState.alarm();
         }
     }
 
