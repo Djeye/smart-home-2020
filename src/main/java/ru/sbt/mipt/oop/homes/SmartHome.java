@@ -24,10 +24,6 @@ public class SmartHome implements Actionable {
         rooms.add(room);
     }
 
-    public Collection<Room> getRooms() {
-        return rooms;
-    }
-
     @Override
     public void execute(Action action) {
         if (rooms != null) {
@@ -35,6 +31,7 @@ public class SmartHome implements Actionable {
                 room.execute(action);
             }
         }
+        action.doAction(this);
         signaling.execute(action);
     }
 }
