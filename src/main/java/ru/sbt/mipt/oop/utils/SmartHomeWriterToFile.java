@@ -10,13 +10,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class SmartHomeWriter {
+public class SmartHomeWriterToFile implements HomeWriter {
     private final String filename;
 
-    public SmartHomeWriter(String filename) {
+    public SmartHomeWriterToFile(String filename) {
         this.filename = filename;
     }
 
+    @Override
     public void writeSmartHomeToGson(SmartHome smartHome) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonString = gson.toJson(smartHome);

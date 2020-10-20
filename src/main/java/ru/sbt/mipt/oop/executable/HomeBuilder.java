@@ -4,7 +4,8 @@ import ru.sbt.mipt.oop.homeobjects.Door;
 import ru.sbt.mipt.oop.homeobjects.Light;
 import ru.sbt.mipt.oop.homeobjects.Room;
 import ru.sbt.mipt.oop.homes.SmartHome;
-import ru.sbt.mipt.oop.utils.SmartHomeWriter;
+import ru.sbt.mipt.oop.utils.HomeWriter;
+import ru.sbt.mipt.oop.utils.SmartHomeWriterToFile;
 
 import java.util.Arrays;
 
@@ -29,7 +30,7 @@ public class HomeBuilder {
         String filename = "output.js";
         HomeBuilder homeBuilder = new HomeBuilder();
         SmartHome smartHome = homeBuilder.buildHome();
-        SmartHomeWriter smartHomeWriter = new SmartHomeWriter(filename);
+        HomeWriter smartHomeWriter = new SmartHomeWriterToFile(filename);
         smartHomeWriter.writeSmartHomeToGson(smartHome);
     }
 }

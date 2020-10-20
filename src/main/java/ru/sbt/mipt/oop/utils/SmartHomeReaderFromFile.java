@@ -7,14 +7,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class SmartHomeReader {
+public class SmartHomeReaderFromFile implements HomeReader{
     private final String filename;
 
-    public SmartHomeReader(String filename) {
+    public SmartHomeReaderFromFile(String filename) {
         this.filename = filename;
     }
 
-    public SmartHome readSmartHomeFromGson(){
+    @Override
+    public SmartHome readSmartHome() {
         Gson gson = new Gson();
         String json = null;
         try {
