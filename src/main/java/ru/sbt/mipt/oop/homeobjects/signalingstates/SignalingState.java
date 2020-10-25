@@ -1,6 +1,6 @@
 package ru.sbt.mipt.oop.homeobjects.signalingstates;
 
-public interface State {
+public interface SignalingState {
     void deactivate(String code);
 
     void activate(String code);

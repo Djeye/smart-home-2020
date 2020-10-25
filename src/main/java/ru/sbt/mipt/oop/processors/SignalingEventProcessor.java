@@ -2,7 +2,6 @@ package ru.sbt.mipt.oop.processors;
 
 import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.homeobjects.Signaling;
-import ru.sbt.mipt.oop.homeobjects.signalingstates.State;
 import ru.sbt.mipt.oop.homes.SmartHome;
 
 import static ru.sbt.mipt.oop.events.SensorEventType.*;
@@ -13,14 +12,14 @@ public class SignalingEventProcessor implements Process{
         if (sensorEvent.getType() == ALARM_ACTIVATE || sensorEvent.getType() == ALARM_DEACTIVATE) {
             boolean alarmActivate = sensorEvent.getType() == ALARM_ACTIVATE;
             // событие от сигнализации
-            smartHome.execute(signaling -> {
-                if (signaling.getClass() != Signaling.class) return;
-                State state = ((Signaling) signaling).getActualState();
+            smartHome.execute(s -> {
+                if (s.getClass() != Signaling.class) return;
+                Signaling signaling = (Signaling) s;
 
                 if (alarmActivate) {
-                    state.activate(sensorEvent.getCode());
+                    signaling.activate(sensorEvent.getCode());
                 } else {
-                    state.deactivate(sensorEvent.getCode());
+                    signaling.deactivate(sensorEvent.getCode());
                 }
             });
         }

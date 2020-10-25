@@ -3,43 +3,42 @@ package ru.sbt.mipt.oop.homeobjects;
 import ru.sbt.mipt.oop.actions.Action;
 import ru.sbt.mipt.oop.actions.Actionable;
 import ru.sbt.mipt.oop.homeobjects.signalingstates.DeactivatedState;
-import ru.sbt.mipt.oop.homeobjects.signalingstates.State;
+import ru.sbt.mipt.oop.homeobjects.signalingstates.SignalingState;
 
 public class Signaling implements Actionable {
-    private State actualState;
+    private SignalingState actualState;
     private String code;
 
     public Signaling() {
         actualState = new DeactivatedState(this);
     }
 
-    public State getActualState() {
+    public SignalingState getActualState() {
         return actualState;
     }
 
-    public void activate(String code) {
+    public boolean isCodeCorrect(String code){
+        return this.code.equals(code);
+    }
+
+    public void setActivationCode(String code){
         this.code = code;
-        System.out.println("> Signaling was activating");
+    }
+
+    public void changeState(SignalingState newState) {
+        actualState = newState;
+    }
+
+    public void activate(String code) {
+        actualState.activate(code);
     }
 
     public void deactivate(String code) {
-        if (this.code.equals(code)) {
-            this.code = null;
-            System.out.println("> Signaling was deactivating");
-        } else {
-            actualState.alarm();
-        }
+        actualState.deactivate(code);
     }
 
     public void callAlarm() {
-        System.out.println("IU IU IU");
-        System.out.println("PU-U PU-U PU-U");
-        System.out.println("DAP DAP DAP DAP");
-        System.out.println("VIIIIIUUU VIIIIIUUU");
-    }
-
-    public void changeState(State newState) {
-        actualState = newState;
+        actualState.alarm();
     }
 
     @Override

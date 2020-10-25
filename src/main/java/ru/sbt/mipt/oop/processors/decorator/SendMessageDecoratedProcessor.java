@@ -5,7 +5,6 @@ import ru.sbt.mipt.oop.events.SensorEventType;
 import ru.sbt.mipt.oop.homeobjects.Signaling;
 import ru.sbt.mipt.oop.homeobjects.signalingstates.ActivatedState;
 import ru.sbt.mipt.oop.homeobjects.signalingstates.AlarmState;
-import ru.sbt.mipt.oop.homeobjects.signalingstates.State;
 import ru.sbt.mipt.oop.homes.SmartHome;
 import ru.sbt.mipt.oop.messages.MessagesSender;
 import ru.sbt.mipt.oop.processors.Process;
@@ -25,8 +24,8 @@ public class SendMessageDecoratedProcessor implements Process {
                 if (object.getClass() != Signaling.class) return;
 
                 Signaling signaling = (Signaling) object;
-                State state = signaling.getActualState();
-                if (state.getClass() == AlarmState.class || state.getClass() == ActivatedState.class) {
+                if (signaling.getActualState().getClass() == AlarmState.class ||
+                        signaling.getActualState().getClass() == ActivatedState.class) {
                     new MessagesSender().sendMessage();
                 }
 
