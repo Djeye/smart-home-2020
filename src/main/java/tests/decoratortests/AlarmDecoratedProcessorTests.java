@@ -12,8 +12,7 @@ import ru.sbt.mipt.oop.homeobjects.signalingstates.DeactivatedState;
 import ru.sbt.mipt.oop.homes.SmartHome;
 import ru.sbt.mipt.oop.processors.DoorEventProcessor;
 import ru.sbt.mipt.oop.processors.Process;
-import ru.sbt.mipt.oop.processors.decorator.AlarmDecorated;
-import ru.sbt.mipt.oop.processors.decorator.ProcessDecorator;
+import ru.sbt.mipt.oop.processors.decorator.AlarmDecoratedProcessor;
 
 import java.util.Arrays;
 
@@ -22,8 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AlarmDecoratedProcessorTests {
     private static final String CODE = "123";
     private SmartHome smartHome;
-    private Process processor = new DoorEventProcessor();
-    private ProcessDecorator decorator;
+    private Process processor = new AlarmDecoratedProcessor(new DoorEventProcessor());
     private Door door;
 
     @BeforeEach
@@ -34,9 +32,6 @@ public class AlarmDecoratedProcessorTests {
                 Arrays.asList(door),
                 "kitchen");
         smartHome.addRoom(room);
-
-        decorator = new AlarmDecorated();
-        processor = decorator.decorate(processor);
     }
 
     @Test

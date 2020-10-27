@@ -1,16 +1,18 @@
 package ru.sbt.mipt.oop.processors.decorator;
 
+import ru.sbt.mipt.oop.command.CommandSender;
 import ru.sbt.mipt.oop.events.SensorEvent;
 import ru.sbt.mipt.oop.events.SensorEventType;
 import ru.sbt.mipt.oop.homeobjects.Signaling;
 import ru.sbt.mipt.oop.homeobjects.signalingstates.ActivatedState;
 import ru.sbt.mipt.oop.homeobjects.signalingstates.AlarmState;
 import ru.sbt.mipt.oop.homes.SmartHome;
-import ru.sbt.mipt.oop.messages.MessagesSender;
 import ru.sbt.mipt.oop.processors.Process;
 
 public class SendMessageDecoratedProcessor implements Process {
     private final Process processor;
+    private final CommandSender commandSender = new CommandSender();
+    private SensorEvent currentSensorEvent;
 
     public SendMessageDecoratedProcessor(Process processor) {
         this.processor = processor;
@@ -26,7 +28,11 @@ public class SendMessageDecoratedProcessor implements Process {
                 Signaling signaling = (Signaling) object;
                 if (signaling.getActualState().getClass() == AlarmState.class ||
                         signaling.getActualState().getClass() == ActivatedState.class) {
-                    new MessagesSender().sendMessage();
+                    // отправляем сообщение только раз, при одном событии
+                    if (sensorEvent.equals(currentSensorEvent)) {
+                        currentSensorEvent = sensorEvent;
+                        commandSender.sendAlarmMessage();
+                    }
                 }
 
                 processor.process(smartHome, sensorEvent);

@@ -10,16 +10,14 @@ import ru.sbt.mipt.oop.homeobjects.Signaling;
 import ru.sbt.mipt.oop.homes.SmartHome;
 import ru.sbt.mipt.oop.processors.DoorEventProcessor;
 import ru.sbt.mipt.oop.processors.Process;
-import ru.sbt.mipt.oop.processors.decorator.ProcessDecorator;
-import ru.sbt.mipt.oop.processors.decorator.SendMessageDecorated;
+import ru.sbt.mipt.oop.processors.decorator.SendMessageDecoratedProcessor;
 
 import java.util.Arrays;
 
 public class SendMessageDecoratedProcessorTests {
     private static final String CODE = "123";
     private SmartHome smartHome;
-    private Process processor = new DoorEventProcessor();
-    private ProcessDecorator decorator;
+    private Process processor = new SendMessageDecoratedProcessor(new DoorEventProcessor());
     private SensorEvent event;
     private Door door;
 
@@ -31,9 +29,6 @@ public class SendMessageDecoratedProcessorTests {
                 Arrays.asList(door),
                 "kitchen");
         smartHome.addRoom(room);
-
-        decorator = new SendMessageDecorated();
-        processor = decorator.decorate(processor);
 
         event = new SensorEvent(SensorEventType.DOOR_OPEN, "1");
     }
