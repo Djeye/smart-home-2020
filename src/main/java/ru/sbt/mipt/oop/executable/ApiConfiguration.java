@@ -47,7 +47,7 @@ public class ApiConfiguration {
     }
 
     @Bean
-    public Process getDoorProcessors() {
+    public Process getHallDoorProcessors() {
         return new SendMessageDecoratedProcessor(new AlarmDecoratedProcessor(new HallDoorEventProcessor(new CommandSender())));
     }
 }
