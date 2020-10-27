@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.api.events;
+package ru.sbt.mipt.api.events;
 
 /**
  * Available event types in library v3.7.1:

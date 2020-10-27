@@ -1,7 +1,6 @@
-package ru.sbt.mipt.oop.api.sample;
+package ru.sbt.mipt.api.sample;
 
-
-import ru.sbt.mipt.oop.api.events.SensorEventsManager;
+import ru.sbt.mipt.api.events.SensorEventsManager;
 
 public class Sample {
 
@@ -10,6 +9,7 @@ public class Sample {
         sensorEventsManager.registerEventHandler(event -> {
             System.out.println("Event type [" + event.getEventType() + "] from object with id=" + event.getObjectId() + "]");
         });
+
         sensorEventsManager.start();
     }
 }

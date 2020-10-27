@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop.api.events;
+package ru.sbt.mipt.api.events;
 
 public interface EventHandler {
 
