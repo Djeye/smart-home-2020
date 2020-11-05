@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.Map;
 
 @Configuration
-@ComponentScan
 public class RemoteControlConfiguration {
     private String RemoteControlId = "0";
 
@@ -22,7 +21,7 @@ public class RemoteControlConfiguration {
 
         remoteControls.forEach(o -> {
             registry.registerRemoteControl(o, RemoteControlId);
-            //RemoteControlId = String.valueOf(Integer.parseInt(RemoteControlId) + 1);
+            RemoteControlId = String.valueOf(Integer.parseInt(RemoteControlId) + 1);
         });
 
         return registry;
@@ -32,20 +31,8 @@ public class RemoteControlConfiguration {
     public RemoteControlImpl smartHomeRegistry(Map<String, Command> commands) {
         RemoteControlImpl remoteControl = new RemoteControlImpl("0");
 
-        Map<String, String> nameToCode = Map.of(
-                "TurnOnLightsCommand", "A",
-                "CloseDoorInHallCommand", "B",
-                "TurnOnLightInHallCommand", "C",
-                "SignalingCommand", "D",
-                "AlarmCommand", "1",
-                "TurnOffLightsCommand", "2"
-        );
-
-        System.out.println(commands.values());
-
         commands.forEach((s, c) -> {
-            //remoteControl.setButton(remoteControl.buttonTranslate(s), c);
-            remoteControl.setButton(nameToCode.get(s), c);
+            remoteControl.setButton(remoteControl.buttonTranslate(s), c);
         });
 
         return remoteControl;

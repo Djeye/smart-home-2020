@@ -18,7 +18,7 @@ import ru.sbt.mipt.oop.adaptors.SmartHomeApiAdapter;
 import java.util.Collection;
 
 @Configuration
-@ComponentScan
+@ComponentScan({"ru.sbt.mipt.oop"})
 public class ApiConfiguration {
     @Bean
     public SmartHome readSmartHome() {

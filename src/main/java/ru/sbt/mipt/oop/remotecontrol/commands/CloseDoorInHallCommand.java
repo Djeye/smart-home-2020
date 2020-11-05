@@ -20,7 +20,7 @@ public class CloseDoorInHallCommand implements Command {
                 return;
             }
             Room room = (Room) object;
-            if ("Hall".equals(room.getName())) {
+            if ("hall".equals(room.getName())) {
                 room.execute(d -> {
                     if (d.getClass() != Door.class) {
                         return;
