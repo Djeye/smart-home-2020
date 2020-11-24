@@ -1,5 +1,6 @@
 package ru.sbt.mipt.oop.remotecontrol;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import ru.sbt.mipt.oop.remotecontrol.commands.Command;
 
@@ -7,9 +8,9 @@ import java.util.Map;
 
 @Component
 public class RemoteControlFactory {
-    private final Map<String, Command> buttons;
+    private final Map<String, Command>  buttons;
 
-    public RemoteControlFactory(Map<String, Command> buttons) {
+    public RemoteControlFactory(@Qualifier(value = "buttons") Map<String, Command> buttons) {
         this.buttons = buttons;
     }
 

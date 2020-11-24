@@ -1,6 +1,5 @@
 package ru.sbt.mipt.oop.executable;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.sbt.mipt.oop.remotecontrol.RemoteControlFactory;
@@ -37,7 +36,7 @@ public class RemoteControlConfiguration {
     @Bean
     public Map<String, Command> buttons(Map<String, Command> commands) {
         Map<String, String> translateFactory = new HashMap<>();
-        Map<String, Command> buttonsFactory = new HashMap<>();
+        Map<String, Command> buttons = new HashMap<>();
 
         translateFactory.put("closeDoorInHallCommand", "A");
         translateFactory.put("turnOnLightInHallCommand", "B");
@@ -46,8 +45,8 @@ public class RemoteControlConfiguration {
         translateFactory.put("alarmCommand", "1");
         translateFactory.put("signalingCommand", "2");
 
-        commands.forEach((K, V) -> buttonsFactory.put(translateFactory.get(K), V));
+        commands.forEach((K, V) -> buttons.put(translateFactory.get(K), V));
 
-        return buttonsFactory;
+        return buttons;
     }
 }
