@@ -9,7 +9,6 @@ import java.util.Map;
 
 @Component
 public class ApiFactory {
-
     private final Map<String, SensorEventType> eventTypeMap;
 
     public ApiFactory(Map<String, SensorEventType> eventTypeMap) {

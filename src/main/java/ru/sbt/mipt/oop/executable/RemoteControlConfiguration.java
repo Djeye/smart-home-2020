@@ -1,14 +1,16 @@
 package ru.sbt.mipt.oop.executable;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import ru.sbt.mipt.oop.remotecontrol.RemoteControlFactory;
 import ru.sbt.mipt.oop.remotecontrol.RemoteControlImpl;
 import ru.sbt.mipt.oop.remotecontrol.commands.Command;
 import ru.sbt.mipt.rc.RemoteControl;
 import ru.sbt.mipt.rc.RemoteControlRegistry;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
@@ -28,13 +30,24 @@ public class RemoteControlConfiguration {
     }
 
     @Bean
-    public RemoteControlImpl smartHomeRegistry(Map<String, Command> commands) {
-        RemoteControlImpl remoteControl = new RemoteControlImpl("0");
+    public RemoteControlImpl remoteControlImpl(RemoteControlFactory factory) {
+        return new RemoteControlImpl("0", factory);
+    }
 
-        commands.forEach((s, c) -> {
-            remoteControl.setButton(remoteControl.buttonTranslate(s), c);
-        });
+    @Bean
+    public Map<String, Command> buttons(Map<String, Command> commands) {
+        Map<String, String> translateFactory = new HashMap<>();
+        Map<String, Command> buttonsFactory = new HashMap<>();
 
-        return remoteControl;
+        translateFactory.put("closeDoorInHallCommand", "A");
+        translateFactory.put("turnOnLightInHallCommand", "B");
+        translateFactory.put("turnOnLightsCommand", "C");
+        translateFactory.put("turnOffLightsCommand", "D");
+        translateFactory.put("alarmCommand", "1");
+        translateFactory.put("signalingCommand", "2");
+
+        commands.forEach((K, V) -> buttonsFactory.put(translateFactory.get(K), V));
+
+        return buttonsFactory;
     }
 }
